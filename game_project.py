@@ -30,17 +30,98 @@ outside = {
   "name": "outside"
 }
 
-all_rooms = [game_room, outside]
+bedroom1 = {
+    "name": "bedroom 1",
+    "type": "room",
+    
+}
 
-all_doors = [door_a]
+door_b = {
+    "name": "door b",
+    "type": "door",
+}
+
+door_c = {
+    "name": "door c",
+    "type": "door",
+}
+
+key_b = {
+    "name": "key for door b",
+    "type": "key",
+    "target": door_b,
+}
+
+queen_bed = {
+    "name": "queen bed",
+    "type": "furniture",
+}
+
+bedroom2 = {
+    "name": "bedroom 2",
+    "type": "room",
+    
+}
+
+door_d = {
+    "name": "door d",
+    "type": "door",
+}
+
+key_c = {
+    "name": "key for door c",
+    "type": "key",
+    "target": door_c,
+}
+
+key_d = {
+    "name": "key for door d",
+    "type": "key",
+    "target": door_d,
+}
+
+double_bed = {
+    "name": "double bed",
+    "type": "furniture",
+}
+
+dresser = {
+    "name": "dresser",
+    "type": "furniture",
+}
+
+living_room = {
+    "name": "living room",
+    "type": "room",
+    
+}
+
+dining_table = {
+    "name": "dining table",
+    "type": "furniture",
+}
+
+
+
+all_rooms = [game_room, outside, bedroom1, bedroom2, living_room]
+
+all_doors = [door_a, door_b, door_c, door_d]
 
 # define which items/rooms are related
-
 object_relations = {
     "game room": [couch, piano, door_a],
     "piano": [key_a],
-    "outside": [door_a],
-    "door a": [game_room, outside]
+    "outside": [door_d],
+    "door a": [game_room, bedroom1],
+    "door b": [bedroom1, bedroom2],
+    "door c": [bedroom1, living_room],
+    "door d": [living_room, outside],
+    "bedroom 1": [queen_bed, door_a, door_b, door_c],
+    "queen bed": [key_b],
+    "bedroom 2": [double_bed, dresser, door_b],
+    "double bed": [key_c],
+    "dresser": [key_d],
+    "living room": [dining_table, door_c, door_d]
 }
 
 # define game state. Do not directly change this dict. 
