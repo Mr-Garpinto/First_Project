@@ -1,25 +1,303 @@
-# define rooms and items
+#used to pick random quizz
+import random  
+#used to get mixer thats used with sounds                  
+import pygame as py
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+#import matplotlib.pylab as plt
+from pygame import mixer
+import matplotlib.image as mpimg
+#sound
+
+#sound for when you find keys
+def sound_keys(x):
+    if x == "key for door a":
+        py.mixer.init()
+        react = mixer.Sound("/Users/goncalopinto/Documents/GitHub/First_Project/key_sound.wav")
+        react.play()
+    elif x == "key for door b":
+        py.mixer.init()
+        react = mixer.Sound("/Users/goncalopinto/Documents/GitHub/First_Project/key_sound.wav")
+        react.play()
+    elif x == "key for door c":
+        py.mixer.init()
+        react = mixer.Sound("/Users/goncalopinto/Documents/GitHub/First_Project/key_sound.wav")
+        react.play()
+    elif x == "key for door d":
+        py.mixer.init()
+        react = mixer.Sound("/Users/goncalopinto/Documents/GitHub/First_Project/game_win_sound.wav")
+        react.play()        
+
+
+#define quizz
+#define quizz questions and answer's        
+
+answer_a = {
+    "solution":"no",
+    "help":["You might have to take a look at the list-tup-dict class again!", "Don't you dare to ask for more help!"]
+    }
+answer_b = {
+    "solution":"no",
+    "help":["You might have to take a look at the list-tup-dict class again!", "Don't you dare to ask for more help!"]
+    }
+answer_c = {
+    "solution":"yes",
+    "help":["You might have to take a look at the list-tup-dict class again!", "Don't you dare to ask for more help!"]
+    }
+answer_d = {
+    "solution":"yes",
+    "help":["Well I would say you should talk to Pedro, but then again he might hit you for asking!", "Don't you dare to ask for more help!"]
+    }
+answer_e = {
+    "solution":"no",
+    "help":["You should pay attention to Pedro in class!", "Don't you dare to ask for more help!"]
+    }
+answer_f = {
+    "solution":"yes",
+    "help":["You should ask Felipython for a refresher in dictionaries!", "Don't you dare to ask for more help!"]
+    }
+answer_g = {
+    "solution":"yes",
+    "help":["Whatelse could you do? Write a sh*t ton of line in one go?!?!", "Don't you dare to ask for more help!"]
+    }
+answer_h = {
+    "solution":"yes",
+    "help":["Are you sure that you passed the pre-work?", "Don't you dare to ask for more help!"]
+    }
+
+
+quizzs_s = {
+    "Can you apply the same method's to tuples, list and dictionaries?" : answer_a,
+    "Does the following operation work? -> mylist = (1,2,3) * (4,5,6)" : answer_b,
+    "Can you create a list with a dicttionarie?" : answer_c,
+    "Is everything in python a object?" : answer_d,
+    "Can you use append with tupples?" : answer_e,
+    "Can you access a dictionarie with a key?" : answer_f,
+    "Can you call a function inside a function?" : answer_g,
+    "If the remainer of a division if 0, was the number that was divided even?" : answer_h
+    }
+
+#now we need to define the quizz function!
+
+def quizzs():
+    
+    #pick a random quizzs_s question
+    quizz, solution = random.choice(list(quizzs_s.items()))     
+    #ask the player for the quizz question answer, and lower the input
+    answer = input(quizz + "\n\n" + "Whats the answer to this quizz question?").strip().lower()
+    print("")
+    n_help = 0
+    while answer != solution["solution"]:
+        print("")
+        help_h = input("Unfortunatly that's the wrong answer, do you really need a hand?").strip().lower()
+        if help_h == "yes":
+            if n_help < (len(solution["help"])):
+                print("")
+                print(solution["help"][n_help])
+                print("")
+                n_help += 1
+            else:
+                print("")
+                print("Bro I said you shouldn't ask for more help....." + "but.. I'll remind you again: ".join(solution["help"]))
+                print("")
+                answer = input(quizz + "\n" + "So, what's the answer to this question?").strip().lower()
+                print("")
+        elif help_h == "no":
+            print("")
+            answer = input(quizz + "\n\n" + "Whats the answer to this quizz question?").strip().lower()
+    else:
+        if quizz in quizzs_s.keys() and len(quizzs_s.keys()) > 0:
+            quizzs_s.pop(quizz)
+            print("")
+            print("Yeah! I can see that you paid attention to the class!")
+            print("")
+
+# photos
+
+#define the photos function
+
+def images(item):
+    #for item in items:
+       
+    if item == "couch":
+       
+        #ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/couch.jpg"
+        img=mpimg.imread('/Users/goncalopinto/Documents/GitHub/First_Project/couch.jpg')
+        
+    elif item == "piano":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/piano.jpg"
+        
+    elif item == "fireplace":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/fireplace.jpg"
+        
+    elif item == "queen bed":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/queen_bed.jpg"
+        
+    elif item == "safe box":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/safe_box.jpg"
+        
+    elif item == "double bed":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/double_bed.jpg"
+        
+    elif item == "dresser":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/dresser.jpg"
+        
+    elif item == "nightstand":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/nightstand.jpg"
+        
+    elif item == "dinning table":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/dinning_table.jpg"
+        
+    elif item == "canvas":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/canvas.jpg"
+    
+    elif item == "door a":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/door.jpg"
+        
+    elif item == "door b":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/door.jpg"
+        
+    elif item == "door c":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/door.jpg"
+        
+    elif item == "door d":
+        ImageAddress = "/Users/goncalopinto/Documents/GitHub/First_Project/final_door.jpg"
+    
+    #img=mpimg.imread(img)
+    imgplot = plt.imshow(img)
+    plt.show()
+    
+    """
+    ImageItself = Image.open(ImageAddress)
+    ImageNumpyFormat = np.asarray(ImageItself)
+    plt.imshow(ImageNumpyFormat)
+    plt.imshow(ImageNumpyFormat)
+    plt.axis('off')
+    plt.draw()
+    plt.pause(1)
+    #plt.close()
+    """
+    
+    """
+    img = mpimg.imread(ImageAddress)
+    imgplot = plt.imshow(img)
+    plt.show()
+    """
+        
+    return
+            
+        
+    
+     
+
+
+
+# define things
+
+#interactable objects
+
+canvas = {
+    "name": "canvas",
+    "type": "furniture",
+}
+
+nightstand = {
+    "name": "nightstand",
+    "type": "furniture",
+}
+
+safe_box = {
+    "name": "safe box",
+    "type": "furniture",
+}
+
+fireplace = {
+    "name": "fireplace",
+    "type": "furniture",
+}
 
 couch = {
     "name": "couch",
     "type": "furniture",
 }
 
+piano = {
+    "name": "piano",
+    "type": "furniture",
+}
+
+queen_bed = {
+    "name": "queen bed",
+    "type": "furniture",
+}
+
+double_bed = {
+    "name": "double bed",
+    "type": "furniture",
+}
+
+dresser = {
+    "name": "dresser",
+    "type": "furniture",
+}
+
+dining_table = {
+    "name": "dining table",
+    "type": "furniture",
+}
+
+#doors
+
+
 door_a = {
     "name": "door a",
     "type": "door",
 }
 
+door_b = {
+    "name": "door b",
+    "type": "door",
+}
+
+door_c = {
+    "name": "door c",
+    "type": "door",
+}
+
+door_d = {
+    "name": "door d",
+    "type": "door",
+}
+
+#keys
+
+
 key_a = {
-    "name": "key for door a",
+    "name": "key for door a",                           
     "type": "key",
     "target": door_a,
 }
 
-piano = {
-    "name": "piano",
-    "type": "furniture",
+key_b = {
+    "name": "key for door b",
+    "type": "key",
+    "target": door_b,
 }
+
+key_c = {
+    "name": "key for door c",
+    "type": "key",
+    "target": door_c,
+}
+
+key_d = {
+    "name": "key for door d",
+    "type": "key",
+    "target": door_d,
+}
+
+#rooms
 
 game_room = {
     "name": "game room",
@@ -36,58 +314,10 @@ bedroom1 = {
     
 }
 
-door_b = {
-    "name": "door b",
-    "type": "door",
-}
-
-door_c = {
-    "name": "door c",
-    "type": "door",
-}
-
-key_b = {
-    "name": "key for door b",
-    "type": "key",
-    "target": door_b,
-}
-
-queen_bed = {
-    "name": "queen bed",
-    "type": "furniture",
-}
-
 bedroom2 = {
     "name": "bedroom 2",
     "type": "room",
     
-}
-
-door_d = {
-    "name": "door d",
-    "type": "door",
-}
-
-key_c = {
-    "name": "key for door c",
-    "type": "key",
-    "target": door_c,
-}
-
-key_d = {
-    "name": "key for door d",
-    "type": "key",
-    "target": door_d,
-}
-
-double_bed = {
-    "name": "double bed",
-    "type": "furniture",
-}
-
-dresser = {
-    "name": "dresser",
-    "type": "furniture",
 }
 
 living_room = {
@@ -96,10 +326,7 @@ living_room = {
     
 }
 
-dining_table = {
-    "name": "dining table",
-    "type": "furniture",
-}
+
 
 
 
@@ -107,21 +334,21 @@ all_rooms = [game_room, outside, bedroom1, bedroom2, living_room]
 
 all_doors = [door_a, door_b, door_c, door_d]
 
-# define which items/rooms are related
+# define relations between things
 object_relations = {
-    "game room": [couch, piano, door_a],
-    "piano": [key_a],
+    "game room": [couch, piano,fireplace, door_a],
+    "fireplace": [key_a],
     "outside": [door_d],
     "door a": [game_room, bedroom1],
     "door b": [bedroom1, bedroom2],
     "door c": [bedroom1, living_room],
     "door d": [living_room, outside],
-    "bedroom 1": [queen_bed, door_a, door_b, door_c],
-    "queen bed": [key_b],
-    "bedroom 2": [double_bed, dresser, door_b],
-    "double bed": [key_c],
-    "dresser": [key_d],
-    "living room": [dining_table, door_c, door_d]
+    "bedroom 1": [queen_bed,safe_box, door_a, door_b, door_c],
+    "safe box": [key_b],
+    "bedroom 2": [double_bed, dresser,nightstand, door_b],
+    "nightstand": [key_c],
+    "canvas": [key_d],
+    "living room": [dining_table, canvas, door_c, door_d]
 }
 
 # define game state. Do not directly change this dict. 
@@ -158,13 +385,15 @@ def play_room(room):
     if(game_state["current_room"] == game_state["target_room"]):
         print("Congrats! You escaped the room!")
     else:
+        print("")
         print("You are now in " + room["name"])
-        intended_action = input("What would you like to do? Type 'explore' or 'examine'?").strip()
+        print("")
+        intended_action = input("What would you like to do? Type 'explore' or 'examine'?").strip().lower()
         if intended_action == "explore":
             explore_room(room)
             play_room(room)
         elif intended_action == "examine":
-            examine_item(input("What would you like to examine?").strip())
+            examine_item(input("What would you like to examine?").strip().lower())
         else:
             print("Not sure what you mean. Type 'explore' or 'examine'.")
             play_room(room)
@@ -204,35 +433,52 @@ def examine_item(item_name):
     
     for item in object_relations[current_room["name"]]:
         if(item["name"] == item_name):
+            print("")
             output = "You examine " + item_name + ". "
+            print("")
+            images(item_name) #im testing this out to see if I'm able to put the images working yayyy....
             if(item["type"] == "door"):
                 have_key = False
                 for key in game_state["keys_collected"]:
                     if(key["target"] == item):
                         have_key = True
                 if(have_key):
+                    print("")
                     output += "You unlock it with a key you have."
+                    print("")
                     next_room = get_next_room_of_door(item, current_room)
                 else:
+                    print("")
                     output += "It is locked but you don't have the key."
             else:
                 if(item["name"] in object_relations and len(object_relations[item["name"]])>0):
+                    print("")
+                    print("So that you could gaind access to this key, you first need to answer me to this question!")
+                    print("")
+                    quizzs()
                     item_found = object_relations[item["name"]].pop()
                     game_state["keys_collected"].append(item_found)
                     output += "You find " + item_found["name"] + "."
+                    sound_keys(item_found["name"])
                 else:
                     output += "There isn't anything interesting about it."
+                    print("")
             print(output)
             break
 
     if(output is None):
+        print("")
         print("The item you requested is not found in the current room.")
+        print("")
     
-    if(next_room and input("Do you want to go to the next room? Ener 'yes' or 'no'").strip() == 'yes'):
+    if(next_room and input("Do you want to go to the next room? Enter 'yes' or 'no'").strip().lower() == 'yes'):
         play_room(next_room)
     else:
         play_room(current_room)
         
+py.mixer.init()
+react = mixer.Sound("/Users/goncalopinto/Documents/GitHub/First_Project/piano.wav")
+react.play()
 
 game_state = INIT_GAME_STATE.copy()
 

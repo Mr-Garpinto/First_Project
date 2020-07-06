@@ -129,6 +129,7 @@ object_relations = {
 # dict and use the copy to store gameplay state. This 
 # way you can replay the game multiple times.
 
+
 INIT_GAME_STATE = {
     "current_room": game_room,
     "keys_collected": [],
